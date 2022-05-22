@@ -1,0 +1,24 @@
+.post {
+    width: 25%;
+    display: inline-block;
+    padding: 0 15px;
+    margin: 0 0 20px 0;
+    box-sizing: border-box;
+}
+
+.postImage {
+    width: 100%;
+    display: block;
+}
+
+.postTitle {
+    margin: 10px 0 5px 0;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.postDate {
+    font-size: 14px;
+    font-weight: lighter;
+    font-style: italic;
+}
