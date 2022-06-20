@@ -2,17 +2,17 @@ import classes from "./posts.module.css";
 
 import Post from "../post/post";
 import {useEffect, useState} from "react";
+import {useSelector} from "react-redux";
 
-const Posts = (props) => {
-
+const Posts = () => {
+    const category = useSelector((state) => state.category);
     const [postsData, setPostsData] = useState([]);
 
     useEffect(
         () => {
-
             const fetchData = async () => {
                 let url = "http://wp-react-blog.test/wp-json/wp/v2/posts?per_page=8";
-                if (props.category) url += "&categories=" + props.category;
+                if (category) url += "&categories=" + category;
                 const fetchPosts = await fetch(url, {
                     method: "GET",
                     headers: {
@@ -24,7 +24,7 @@ const Posts = (props) => {
                 setPostsData(fetchPostsJson);
             }
             fetchData();
-        }, [props.category, setPostsData]
+        }, [category, setPostsData]
     );
 
     const displayPosts = () => {

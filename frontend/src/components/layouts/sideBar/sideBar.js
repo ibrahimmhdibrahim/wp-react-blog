@@ -1,12 +1,14 @@
 import "./sideBar.module.css";
+import {categoryActions} from "../../../store";
 import {useEffect, useState} from "react";
+import {useDispatch} from "react-redux";
 
-const SideBar = (props) => {
+const SideBar = () => {
+    const dispatch = useDispatch();
     const [categoriesData, setCategoriesData] = useState([]);
 
     useEffect(
         () => {
-
             const fetchData = async () => {
                 const fetchCategories = await fetch("http://wp-react-blog.test/wp-json/wp/v2/categories", {
                     method: "GET",
@@ -16,15 +18,14 @@ const SideBar = (props) => {
                 });
                 const fetchCategoriesJson = await fetchCategories.json();
                 setCategoriesData(fetchCategoriesJson);
-                console.log(fetchCategoriesJson);
             }
             fetchData();
-        }, [props.category, setCategoriesData]
+        }, [setCategoriesData]
     );
 
     const categoryChangeHandler = (e) => {
         let categoryId = e.target.id;
-        props.onChangeCategory(categoryId);
+        dispatch(categoryActions.setCategory({category: categoryId}));
     }
 
     return (
